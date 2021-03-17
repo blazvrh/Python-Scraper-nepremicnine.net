@@ -14,25 +14,27 @@ def scrap():
     now_str = now.strftime("%d.%m.%Y - %H:%M:%S")
     append_to_file(output_file_path, now_str + "\n")
 
+    if Criteria.force_previous_days:
+        scrap_day_window = Criteria.check_previous_days
+    else:
+        try:
+            last_scrap_timestamp = read_pickle(timestamp_pickle_file)
+        except:
+            last_scrap_timestamp = datetime.now() - timedelta(days=Criteria.check_previous_days)
+
+        date_dif = datetime.now() - last_scrap_timestamp
+        scrap_day_window = date_dif.days
+        if date_dif.seconds > 5 * 60 * 60 or scrap_day_window == 0:
+            scrap_day_window += 1
+
+    append_to_file(output_file_path, f"Results for last {scrap_day_window} days" + "\n")
+
     for location in locations:
         text = "\n" + "-" * 20 + "\n" + location.upper() + "\n" + "-" * 20 + "\n"
         append_to_file(output_file_path, text)
 
         url = f"https://www.nepremicnine.net/oglasi-oddaja/{location}/stanovanje/"
-        if Criteria.force_previous_days:
-            params = f"last={Criteria.check_previous_days}&s=16"  # How many days ago do we check
-        else:
-            try:
-                last_scrap_timestamp = read_pickle(timestamp_pickle_file)
-            except:
-                last_scrap_timestamp = datetime.now() - timedelta(days=Criteria.check_previous_days)
-
-            date_dif = datetime.now() - last_scrap_timestamp
-            scrap_day_window = date_dif.days
-            if date_dif.seconds > 5 * 60 * 60 or scrap_day_window == 0:
-                scrap_day_window += 1
-
-            params = f"last={scrap_day_window}&s=16"  # How many days ago do we check
+        params = f"last={scrap_day_window}&s=16"  # How many days ago do we check
 
         ad_list = get_ad_list(url, params)
 
