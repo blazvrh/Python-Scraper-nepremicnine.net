@@ -1,4 +1,9 @@
+# Config file for Gmail username and password
 config_mail_auth.py
+
+# result files
+results/new_flats.txt
+results/timestamp.pickle
 
 # Created by .ignore support plugin (hsz.mobi)
 ### Python template
