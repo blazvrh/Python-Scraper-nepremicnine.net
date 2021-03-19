@@ -11,25 +11,43 @@ class SearchLocations:
     """ Available search locations """
     near_ljubljana = "ljubljana-okolica"
     city_ljubljana = "ljubljana-mesto"
+    gorenjska = "gorenjska"
+    south_primoirska = "juzna-primorska"
+    north_primorska = "severna-primorska"
+    notranjska = "notranjska"
+    savinjska = "savinjska"
+    podravska = "podravska"
+    koroska = "koroska"
+    dolenjska = "dolenjska"
+    posavska = "posavska"
+    zasavska = "zasavska"
+    pomurska = "pomurska"
 
 
 class AdTypes:
     """ Available ad types """
-    rent = "oglasi-oddaja"
-    buy = "oglasi-prodaja"
+    i_want_to_rent = "oglasi-oddaja"
+    i_am_renting = "oglasi-najem"
+    i_am_buying = "oglasi-prodaja"
+    i_am_selling = "oglasi-nakup"
 
 
 class RealestateType:
     """ Realestate type """
     apartment = "stanovanje"
     house = "hisa"
+    weekend_facility = "vikend"
+    land = "posest"
+    office = "poslovni-prostor"
+    garage = "garaza"
+    holiday_facility = "pocitniski-objekt"
 
 
 class SearchCriteria:
     """ Search criteria """
 
     # ad type (rent / buy)
-    ad_type = AdTypes.rent
+    ad_type = AdTypes.i_want_to_rent
 
     # realestate type (apartment / house)
     realestate_type = RealestateType.apartment
