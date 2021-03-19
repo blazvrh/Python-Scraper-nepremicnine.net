@@ -4,6 +4,7 @@ config_mail_auth.py
 # result files
 results/new_flats.txt
 results/timestamp.pickle
+results/results.txt
 
 # Created by .ignore support plugin (hsz.mobi)
 ### Python template

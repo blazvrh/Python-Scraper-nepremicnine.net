@@ -60,13 +60,13 @@ def get_scrap_time_window() -> int:
     SearchCriteria.force_previous_days is set to True, SearchCriteria.check_previous_days is returned
     :return: int: days past since last scraping
     """
-    if config.SearchCriteria.force_previous_days:
-        scrap_time_window_days = config.SearchCriteria.check_previous_days
+    if config.SearchCriteria.force_time_window:
+        scrap_time_window_days = config.SearchCriteria.time_window_days
     else:
         try:
             last_scrap_timestamp = file_handler.read_pickle(config.timestamp_pickle_file)
         except:
-            last_scrap_timestamp = datetime.now() - timedelta(days=config.SearchCriteria.check_previous_days)
+            last_scrap_timestamp = datetime.now() - timedelta(days=config.SearchCriteria.time_window_days)
 
         date_dif = datetime.now() - last_scrap_timestamp
         scrap_time_window_days = date_dif.days

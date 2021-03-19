@@ -3,7 +3,7 @@
 debug_mode = True
 
 # Local files
-output_file_path = "results/new_flats.txt"
+output_file_path = "results/results.txt"
 timestamp_pickle_file = "results/timestamp.pickle"
 
 
@@ -48,12 +48,12 @@ class SearchCriteria:
     min_size = 50
     max_size = 9999999
 
-    # How many days in the past do we check for new ads
-    check_previous_days = 7
-
     # True -> always check last check_previous_days;
     # False -> Scrap just the difference from previous scrap
-    force_previous_days = False
+    force_time_window = False
+
+    # How many days in the past do we check for new ads
+    time_window_days = 7
 
 
 class Email:
