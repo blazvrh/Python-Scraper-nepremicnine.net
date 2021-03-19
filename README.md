@@ -18,6 +18,7 @@
     - This is a requirement if you want to access your Gmail account from Python
 1. Configure settings in [config.py](config.py) to your linking
 1. Run main.py
+1. You can edit [Scraper.bat](tools/Scraper.bat) for automated script runs with venv
 
 ## Results
 - Results will be saved to `results.txt` in [results](results) folder
