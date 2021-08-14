@@ -1,3 +1,4 @@
+#!venv/Scripts/python
 """ Program entry point """
 from datetime import datetime, timedelta
 from bs4 import element
