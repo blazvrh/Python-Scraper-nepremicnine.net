@@ -7,7 +7,8 @@ from src.file_handler import append_to_file
 class Ad:
     """ Ad container """
 
-    def __init__(self, ad_tag: element.Tag):
+    def __init__(self, ad_tag: element.Tag, scrap_timestamp: float):
+        self.scrap_timestamp = scrap_timestamp
         self.ad_tag = ad_tag
 
         self.parse_error_occurred = False
