@@ -1,35 +1,45 @@
 """ Email sender """
+from datetime import datetime
 import smtplib
 from email.mime.text import MIMEText
 
+import config
+import src.file_handler as file_handler
 from config_mail_auth import gmail_user, gmail_password
 
 
-def send_email(recipients: list, subject: str, body: str):
+class Email:
     """
-    Send email from a Gmail account
-    :param recipients: list[str]
-    :param subject: str
-    :param body: str (can include utf-16 characters)
-    :return: None
+    Email handler
     """
-    message = MIMEText(body, 'plain', 'utf-8')
+    def __init__(self):
+        self.email_subject = config.Email.subject + " - " + datetime.now().strftime("%d.%m.%Y %H:%M")
+        self.email_body = file_handler.get_file_content(config.output_file_path)
+        self.recipients = config.Email.recipients
 
-    message['Subject'] = subject
-    message['From'] = gmail_user
-    message['To'] = ','.join(recipients)
+    def send_email(self):
+        """
+        Send email from a Gmail account
 
-    try:
-        server = smtplib.SMTP_SSL('smtp.gmail.com', 465)
-        server.ehlo()
+        :return: None
+        """
+        message = MIMEText(self.email_body, 'plain', 'utf-8')
 
-        server.login(gmail_user, gmail_password)
+        message['Subject'] = self.email_subject
+        message['From'] = gmail_user
+        message['To'] = ','.join(self.recipients)
 
-        server.sendmail(message['From'], message['To'], message.as_string())
+        try:
+            server = smtplib.SMTP_SSL('smtp.gmail.com', 465)
+            server.ehlo()
 
-        server.close()
+            server.login(gmail_user, gmail_password)
 
-        print('Email sent!')
-    except Exception as err:
-        # TODO Write error to log file
-        raise err
+            server.sendmail(message['From'], message['To'], message.as_string())
+
+            server.close()
+
+            print('Email sent!')
+        except Exception as err:
+            # TODO Write error to log file
+            raise err
