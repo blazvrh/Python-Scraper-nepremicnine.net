@@ -4,7 +4,7 @@ debug_mode = True
 
 # Local files
 output_file_path = "results/results.txt"
-timestamp_pickle_file = "results/timestamp.pickle"
+pickle_file_path = "results/saved_data.pickle"
 
 
 class SearchLocations:
