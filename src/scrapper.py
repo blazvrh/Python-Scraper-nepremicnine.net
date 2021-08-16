@@ -33,7 +33,7 @@ class SavedData:
             saved_data = file_handler.read_pickle(config.pickle_file_path)
         except:
             saved_data = {
-                "datetime": datetime.now() - timedelta(days=config.SearchCriteria.time_window_days),
+                "datetime": (datetime.now() - timedelta(days=config.SearchCriteria.time_window_days)).timestamp(),
                 "ads": {}
             }
         return saved_data
