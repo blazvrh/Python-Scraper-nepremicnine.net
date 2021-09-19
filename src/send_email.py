@@ -27,7 +27,7 @@ class Email:
 
         message['Subject'] = self.email_subject
         message['From'] = gmail_user
-        message['To'] = ','.join(self.recipients)
+        message['To'] = ', '.join(self.recipients)
 
         try:
             server = smtplib.SMTP_SSL('smtp.gmail.com', 465)
@@ -35,7 +35,7 @@ class Email:
 
             server.login(gmail_user, gmail_password)
 
-            server.sendmail(message['From'], message['To'], message.as_string())
+            server.sendmail(message['From'], self.recipients, message.as_string())
 
             server.close()
 
